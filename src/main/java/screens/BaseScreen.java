@@ -17,6 +17,18 @@ public class BaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
+    public void pause(int time) {
+        try {
+            Thread.sleep(1000L * time);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void clickWait(AndroidElement element, int time) {
+        new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
     public boolean validateTextPresentInElement(AndroidElement element, String text, int time) {
         try {
             return new WebDriverWait(driver, time).until(ExpectedConditions.textToBePresentInElement(element, text));
