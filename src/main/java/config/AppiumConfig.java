@@ -30,6 +30,8 @@ public class AppiumConfig {
         try {
             driver = new AppiumDriver<>(new URL(urlNexus5_1), desiredCapabilities);
         } catch (MalformedURLException e) {
+            System.out.println("Created Exception -> setUp()");
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
 
