@@ -8,26 +8,14 @@ import screens.SplashScreen;
 
 public class RegistrationTests extends AppiumConfig {
 
-    SplashScreen splashScreen;
-    SearchScreen searchScreen;
-
     @BeforeMethod
-    public void setUp() {
-        System.out.println("hello");
-
-        splashScreen = new SplashScreen(driver);
-        System.out.println("1");
-
-        searchScreen = new SearchScreen(driver);
-        System.out.println("2");
-
-        searchScreen.navigateToRegistrationScreen();
-        System.out.println("3");
+    public void beforeTest(){
+        new SplashScreen(driver);
+        new SearchScreen(driver).goToRegistrationScreen();
     }
 
     @Test
-    public void registration() {
+    public void registrationPositiveTest(){
 
     }
-
 }
