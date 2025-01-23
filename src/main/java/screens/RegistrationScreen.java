@@ -23,11 +23,19 @@ public class RegistrationScreen extends BaseScreen {
     @FindBy(id = "com.telran.ilcarro:id/editRegPassword")
     AndroidElement inputPassword;
 
+    @FindBy(id = "com.telran.ilcarro:id/checkBoxAgree")
+    AndroidElement checkbox;
+
+    @FindBy(id = "com.telran.ilcarro:id/regBtn")
+    AndroidElement btnRegistration;
+
     public void typeRegistrationForm(UserDTO userDTO) {
         inputName.sendKeys(userDTO.getFirstName());
         inputLastName.sendKeys(userDTO.getLastName());
         inputEmail.sendKeys(userDTO.getUsername());
         inputPassword.sendKeys(userDTO.getPassword());
+        clickWait(checkbox, 5);
+        clickWait(btnRegistration, 5);
     }
 
 }

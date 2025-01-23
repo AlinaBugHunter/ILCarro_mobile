@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,17 +16,6 @@ public class BaseScreen {
     public BaseScreen(AppiumDriver<AndroidElement> driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
-
-    public boolean validateTextPresentInElement(AndroidElement element, String text, int time) {
-        try {
-            return new WebDriverWait(driver, time)
-                    .until(ExpectedConditions.textToBePresentInElement(element, text));
-        } catch (TimeoutException e) {
-            System.out.println("Created Exception -> validateTextPresentInElement()");
-            System.out.println(e.getMessage());
-            return false;
-        }
     }
 
     public void pause(int time) {
@@ -41,4 +31,25 @@ public class BaseScreen {
         new WebDriverWait(driver, time)
                 .until(ExpectedConditions.elementToBeClickable(element)).click();
     }
+
+    public boolean validateTextPresentInElement(AndroidElement element, String text, int time) {
+        try {
+            return new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.textToBePresentInElement(element, text));
+        } catch (TimeoutException e) {
+            System.out.println("Created Exception -> validateTextPresentInElement()");
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    // Pop Up Message Success
+
+    @FindBy(xpath = "/hierarchy/android.widget.Toast")
+    AndroidElement pupUpMessage;
+
+    public boolean validatePopUpMessage(String text) {
+        return validateTextPresentInElement(pupUpMessage, text, 5);
+    }
+
 }
