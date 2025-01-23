@@ -8,8 +8,7 @@ import screens.SplashScreen;
 public class SplashTests extends AppiumConfig {
 
     @Test
-    public void validateVersionApp(){
-        Assert.assertTrue(new SplashScreen(driver)
-                .validateVersion("Version 1.0.0"));
+    public void validateVersionApp() {
+        Assert.assertTrue(new SplashScreen(driver).validateVersion("Version 1.0.0"));
     }
 }

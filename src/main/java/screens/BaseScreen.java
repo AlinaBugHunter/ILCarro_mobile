@@ -17,13 +17,13 @@ public class BaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    public boolean textInElementPresent(AndroidElement element, String text, int time) {
+    public boolean validateTextPresentInElement(AndroidElement element, String text, int time) {
         try {
             return new WebDriverWait(driver, time)
                     .until(ExpectedConditions.textToBePresentInElement(element, text));
         } catch (TimeoutException e) {
-            System.out.println("created exception --> textInElementPresent");
-            e.printStackTrace();
+            System.out.println("Created Exception -> validateTextPresentInElement()");
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -32,12 +32,13 @@ public class BaseScreen {
         try {
             Thread.sleep(1000L * time);
         } catch (InterruptedException e) {
+            System.out.println("Created Exception -> pause()");
             throw new RuntimeException(e);
         }
     }
 
     public void clickWait(AndroidElement element, int time) {
-        new WebDriverWait(driver,time)
+        new WebDriverWait(driver, time)
                 .until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 }
