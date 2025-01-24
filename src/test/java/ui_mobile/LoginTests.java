@@ -35,4 +35,109 @@ public class LoginTests extends AppiumConfig {
 
     }
 
+    @Test
+    public void login_emptyEmail() {
+
+        UserDTO userDTO = UserDTO.builder()
+                .username("")
+                .password("Password123!")
+                .build();
+
+        loginScreen = new LoginScreen(driver);
+        loginScreen.typeLoginForm(userDTO);
+
+        Assert.assertTrue(new BaseScreen(driver).validateAlertMessage("All fields must be filled and agree terms"));
+
+    }
+
+    @Test
+    public void login_spaceInEmail() {
+
+        UserDTO userDTO = UserDTO.builder()
+                .username(" ")
+                .password("Password123!")
+                .build();
+
+        loginScreen = new LoginScreen(driver);
+        loginScreen.typeLoginForm(userDTO);
+
+        Assert.assertTrue(new BaseScreen(driver).validateAlertMessage("All fields must be filled and agree terms"));
+
+    }
+
+    @Test
+    public void login_invalidEmail_WOLocalPart() {
+
+        UserDTO userDTO = UserDTO.builder()
+                .username("@example.com")
+                .password("Password123!")
+                .build();
+
+        loginScreen = new LoginScreen(driver);
+        loginScreen.typeLoginForm(userDTO);
+
+        Assert.assertTrue(new BaseScreen(driver).validateAlertMessage("Login or Password incorrect"));
+
+    }
+
+    @Test
+    public void login_invalidEmail_WODomainPart() {
+
+        UserDTO userDTO = UserDTO.builder()
+                .username("testemail@example")
+                .password("Password123!")
+                .build();
+
+        loginScreen = new LoginScreen(driver);
+        loginScreen.typeLoginForm(userDTO);
+
+        Assert.assertTrue(new BaseScreen(driver).validateAlertMessage("Login or Password incorrect"));
+
+    }
+
+    @Test
+    public void login_emptyPassword() {
+
+        UserDTO userDTO = UserDTO.builder()
+                .username("testemail@example.com")
+                .password("")
+                .build();
+
+        loginScreen = new LoginScreen(driver);
+        loginScreen.typeLoginForm(userDTO);
+
+        Assert.assertTrue(new BaseScreen(driver).validateAlertMessage("All fields must be filled and agree terms"));
+
+    }
+
+    @Test
+    public void login_spaceInPassword() {
+
+        UserDTO userDTO = UserDTO.builder()
+                .username("testemail@example.com")
+                .password(" ")
+                .build();
+
+        loginScreen = new LoginScreen(driver);
+        loginScreen.typeLoginForm(userDTO);
+
+        Assert.assertTrue(new BaseScreen(driver).validateAlertMessage("All fields must be filled and agree terms"));
+
+    }
+
+    @Test
+    public void login_invalidPassword() {
+
+        UserDTO userDTO = UserDTO.builder()
+                .username("testemail@example.com")
+                .password("Password123")
+                .build();
+
+        loginScreen = new LoginScreen(driver);
+        loginScreen.typeLoginForm(userDTO);
+
+        Assert.assertTrue(new BaseScreen(driver).validateAlertMessage("Login or Password incorrect"));
+
+    }
+
 }
