@@ -29,12 +29,21 @@ public class RegistrationScreen extends BaseScreen {
     @FindBy(id = "com.telran.ilcarro:id/regBtn")
     AndroidElement btnRegistration;
 
-    public void typeRegistrationForm(UserDTO userDTO) {
+    private void fillRegistrationForm(UserDTO userDTO) {
         inputName.sendKeys(userDTO.getFirstName());
         inputLastName.sendKeys(userDTO.getLastName());
         inputEmail.sendKeys(userDTO.getUsername());
         inputPassword.sendKeys(userDTO.getPassword());
+    }
+
+    public void typeRegistrationForm(UserDTO userDTO) {
+        fillRegistrationForm(userDTO);
         clickWait(checkbox, 5);
+        clickWait(btnRegistration, 5);
+    }
+
+    public void typeRegistrationForm_WOCheckbox(UserDTO userDTO) {
+        fillRegistrationForm(userDTO);
         clickWait(btnRegistration, 5);
     }
 

@@ -43,13 +43,22 @@ public class BaseScreen {
         }
     }
 
-    // Pop Up Message Success
+    // Pop Up Message
 
     @FindBy(xpath = "/hierarchy/android.widget.Toast")
     AndroidElement pupUpMessage;
 
     public boolean validatePopUpMessage(String text) {
         return validateTextPresentInElement(pupUpMessage, text, 5);
+    }
+
+    // Alert Message
+
+    @FindBy(id = "android:id/message")
+    AndroidElement alertMessage;
+
+    public boolean validateAlertMessage(String text) {
+        return validateTextPresentInElement(alertMessage, text, 5);
     }
 
 }
