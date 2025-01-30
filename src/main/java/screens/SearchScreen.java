@@ -29,4 +29,12 @@ public class SearchScreen extends BaseScreen {
         clickWait(btnLogin, 5);
     }
 
+    @FindBy(xpath = "//*[@text='My Cars']")
+    AndroidElement btnMyCars;
+
+    public void navigateToMyCarsScreen() {
+        clickWait(btnMoreOptions, 5);
+        clickWait(btnMyCars, 5);
+    }
+
 }
