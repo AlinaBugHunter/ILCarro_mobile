@@ -15,7 +15,7 @@ public class AppiumConfig {
     public static AppiumDriver<AndroidElement> driver;
 
     @BeforeMethod
-    public void setup(){
+    public void setup() {
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "Android");
@@ -37,7 +37,7 @@ public class AppiumConfig {
     }
 
     @AfterMethod
-    public void tearDown(){
+    public void tearDown() {
         //driver.quit();
     }
 }
