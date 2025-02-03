@@ -4,6 +4,7 @@ import dto.CarDTO;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -45,6 +46,9 @@ public class AddNewCarScreen extends BaseScreen {
     @FindBy(id = "com.telran.ilcarro:id/editAbout")
     AndroidElement inputAbout;
 
+    @FindBy(id = "com.telran.ilcarro:id/addCarBtn")
+    AndroidElement btnAddCar;
+
     public void addNewCar(CarDTO car) {
 
         inputSerialNumber.sendKeys(car.getSerialNumber());
@@ -58,12 +62,16 @@ public class AddNewCarScreen extends BaseScreen {
         int width = driver.manage().window().getSize().getWidth();
         System.out.println(height + "X" + width);
         TouchAction<?> touchAction = new TouchAction<>(driver);
-        //touchAction.longPress()
+        touchAction.longPress(PointOption.point(5, height / 6 * 5))
+                .moveTo(PointOption.point(5, height / 6)).release().perform();
+
         inputCarClass.sendKeys(car.getCarClass());
         typeFuel(car.getFuel());
         inputYear.sendKeys(car.getYear());
         inputSeats.sendKeys(car.getSeats() + "");
         inputAbout.sendKeys(car.getAbout());
+        clickWait(btnAddCar, 10);
+
     }
 
     private void typeFuel(String fuel) {
